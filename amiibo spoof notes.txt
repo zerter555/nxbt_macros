@@ -1,0 +1,82 @@
+cd ~/joycontrol
+sudo python3 ./run_controller_cli.py PRO_CONTROLLER
+
+amiibo /home/amiibo/Downloads/zelda-amiibo/SMASH_Zelda.bin // dont use old
+nfc /home/amiibo/Downloads/zelda-amiibo/8-bit-Link.bin
+
+https://gist.github.com/colemickens/b08d1a339f4483c6b3c08e739d6cf5d0
+
+
+password: kolijozerter
+
+
+== Cheat Sheet ==================================================================================
+notes: once connected dont use joycon or else spoofer will get disconnected
+[redo all steps again]
+
+**setup and connection**
+step1: [nitendo switch] go controllers(joycon icon) and go to change grip order
+step2: type(copy/paste) to pc terminal and press enter:
+ 
+sudo python3 ./run_controller_cli.py PRO_CONTROLLER
+
+step3: if terminal ask for password type(copy/paste): kolijozerter then press enter
+step4: wait for controller to pair
+step5: go to game/zelda
+step6: game will ask you for controller
+step7: bellow this note replace SMASH_Zelda(the name before .bin) with the name of the desired amiibo for name reference check 
+in the zelda-amiibo folder go to pc terminal copy and paste
+
+nfc /home/amiibo/Downloads/zelda-amiibo/8-bit-Link.bin
+
+step8: type keyboard and will ask you to press enter to start keyboard mode
+(enter again if you want to exit keyboard mode)
+step9: hold Q and E until the controller is connected to the switch,
+when the controller is connected hold A untill the menu is gone
+step10: you can now use amiibo and control using keyboard for controls/key bindings refer 
+to controls bellow.q
+
+**Disconnecting or when done**
+
+multiple ways to disconnect.
+- use switch joycon
+- in terminal press [ctrl + c] twice (if you disconnect do this before reconnecting and doing step1-10)
+- in nitendo switch go controllers(joycon icon) and go to change grip order then close the switch
+- or just close the switch directly
+
+
+**How to swap Amiibos**
+1. press enter while in keyboard mode
+2. bellow this note replace SMASH_Zelda(the name before .bin) with the name of the desired amiibo for name reference check 
+in the zelda-amiibo folder go to pc terminal copy and paste
+nfc /home/amiibo/Downloads/zelda-amiibo/.bin
+3. press enter
+4. go back to keyboard mode
+
+**How to reuse amiibos in the same day (Time Travel)**
+1. save game
+2. exit/close game
+3. nintendo switch go to system setting (gear icon)q
+4. go to system tab on the side (if cannot see scroll down the side)
+5. go to date and time
+6. tap date and time
+7. advance day add 1 day then click ok
+8. click back until to game menu
+9. start the game 
+
+**CONTROLS**
+keyboard ==== Switch
+A		A
+S		B
+W		X
+D		Y
+Q		L use amiibo (shieka runes)
+E		R
+U		ZL
+O		ZR
+Esc		+(menu)
+M		-(map)
+Q		
+Arrow keys	Move
+j,k,l,i		camera rotation
+backspace(botton above enter)      home
