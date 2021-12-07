@@ -68,6 +68,76 @@
                         please ensure that you're on the Home Screen.
                     </p>
                 </div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NXBT Webapp</title>
+        <link rel="icon" type="image/png" href="favicon.png"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header class="top-bar">
+            <div class="top-bar-wrapper">
+                <div>
+                    <h1>NXBT</h1><div class="mono">v0.1.4</div>
+                </div>
+                <div id="status-indicator" class="hidden surface-lighter">
+                    <div id="status-indicator-light" class="indicator-yellow"></div>
+                    <span id="status-indicator-text">Loading</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="controller-selection">
+                <h1>Create a Controller</h1>
+                <div class="hidden surface controller-option" onclick="createJoyConL()">
+                    <div class="controller-option-img-wrapper">
+                        <img src="joyconl.svg" draggable="false">
+                    </div>
+                    Joy-Con (L)
+                </div>
+                <div class="surface controller-option" onclick="createProController()">
+                    <div class="controller-option-img-wrapper">
+                        <img src="procon.svg" draggable="false">
+                    </div>
+                    Pro Controller
+                </div>
+                <div class="hidden surface controller-option" onclick="createJoyConR()">
+                    <div class="controller-option-img-wrapper">
+                        <img src="joyconr.svg" draggable="false">
+                    </div>
+                    Joy-Con (R)
+                </div>
+            </section>
+
+            <section id="loader" class="surface hidden">
+                <div id="loader-progress-wrapper" class="surface-lighter">
+                    <div id="loader-blocks">
+                        <div class="loader-block loader-block-highlight"></div>
+                        <div class="loader-block"></div>
+                        <div class="loader-block"></div>
+                        <div class="loader-block"></div>
+                    </div>
+                </div>
+                <div id="loader-text" class="surface-lighter">Loading</div>
+                <div class="text-section">
+                    <h2>Tips</h2>
+                    <h2 class="tip-box">1. First Time Connection</h2>
+                    <p>
+                        If this is your first time connecting to your Nintendo
+                        Switch with NXBT, please ensure that you're on the "Change Grip/Order" menu.
+                        This sub-menu is available from within the Controllers menu, located on the 
+                        bottom row of the Switch's Home Screen.
+                    </p>
+                    <h2 class="tip-box">2. Reconnection</h2>
+                    <p>
+                        If you've previously connected to this Nintendo Switch using NXBT,
+                        please ensure that you're on the Home Screen.
+                    </p>
+                </div>
             </section>
 
             <section id="controller-config" class="surface hidden">
@@ -143,6 +213,205 @@
                                 </tr>
                                 <tr>
                                     <td>Left Stick Press</td>
+                                    <td>T</td>
+                                </tr>
+                                <tr>
+                                    <td>Right Stick</td>
+                                    <td>Arrow Keys</td>
+                                </tr>
+                                <tr>
+                                    <td>Right Stick Press</td>
+                                    <td>Y</td>
+                                </tr>
+                                <tr>
+                                    <td>Dpad</td>
+                                    <td>G V B N</td>
+                                </tr>
+                                <tr>
+                                    <td>Home & Capture</td>
+                                    <td>[ & ]</td>
+                                </tr>
+                                <tr>
+                                    <td>Plus & Minus</td>
+                                    <td>6 & 7</td>
+                                </tr>
+                                <tr>
+                                    <td>A B X Y</td>
+                                    <td>L K I J</td>
+                                </tr>
+                                <tr>
+                                    <td>L & ZL</td>
+                                    <td>1 & 2</td>
+                                </tr>
+                                <tr>
+                                    <td>R & ZR</td>
+                                    <td>8 & 9</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="controller-map" class="hidden surface-lighter">
+                        <p>
+                            Gamepad controls should match the Nintendo Switch
+                            Pro Controller to some degree in a physical manner.
+                            Please consult the gamepad display above to see
+                            which buttons are actuating.
+                        </p>
+                        <p>
+                            Future plans include enabling key remapping. In the
+                            meantime, I apologize for any inconvience!
+                        </p>
+                    </div>
+                </div>
+                <div id="controller-commands" class="controller-config-subsection">
+                    <h2 class="surface-lighter">Controller Commands</h2>
+                    <button onclick="shutdownController()">Shutdown Controller</button>
+                    <button onclick="recreateProController()">Recreate Controller</button>
+                    <button onclick="restartController()">Restart Controller</button>
+                    <h2 class="surface-lighter">Controller Macro</h2>
+                    <p>
+                        <strong>Note:</strong> the main input device will override a running
+                        macro.
+                    </p>
+                    <textarea id="macro-text" class="mono" placeholder="Type Your Macro Here" onchange="saveMacroTxt()" onfocus="disableKeyHandlers()" onblur="enableKeyHandlers()" ></textarea>
+                    <button onclick="sendMacro()">Run Macro</button>
+                    <h2 class="surface-lighter" style="background-color: navy;">Custom Controller Commands</h2>
+                    <div>
+                        <label>Macros Total Time: </label>
+                        <input id="macrosTimeInput" type="number" onchange="saveMacroTime()" style="color: black;">
+                    </div>
+                    <button onclick="macrosRestartCtrl()" class="mrgnTp-10" style="background-color: lightgreen; width: auto;">Run Macros then Restart Controller</button>
+                    <h3 class="surface-lighter">Auto Execute</h3>
+                        <label>Interval: </label>
+                        <input id="macrosAutoIntervalInput" type="number" onchange="saveMacroInterval()" style="color: black;">
+                        <button id="startAutoMacroBtn" onclick="runAutoMacro()" class="autoMacro startMacro mrgnTp-10">START</button>
+                        <button id="stopAutoMacroBtn" onclick="stopAutoMacro()" class="autoMacro stopMacro mrgnTp-10" style="display: none;">STOP</button>
+                    <style>
+                        .autoMacro{
+                            width: auto !important;
+                        }
+                        .startMacro{
+                            background-color: lightgreen;
+                        }
+                        .stopMacro{
+                            background-color: tomato;
+                        }
+
+                        .mrgnTp-10{
+                            margin-top: 10px;
+                        }
+                    </style>
+                    <script>
+                        var autoMacro;
+                        var storedMacroTime = localStorage.getItem("nxbtMacroTimeTotal");
+                        var storedMacroInterval = localStorage.getItem("nxbtMacroInterval");
+                        var storedMacroTxt = localStorage.getItem("nxbtMacroTxt");
+
+                        
+                        if(storedMacroTime){
+                            document.getElementById("macrosTimeInput").value = storedMacroTime;
+                        }
+                        if(storedMacroInterval){
+                            document.getElementById("macrosAutoIntervalInput").value = storedMacroInterval;
+                        }
+                        if(storedMacroTxt){
+                            document.getElementById("macro-text").value = storedMacroTxt;
+                            calculateTotalMacroTime();
+                        }
+
+                        function macrosRestartCtrl(){
+                            var macroTxt = document.getElementById("macro-text").value
+                            if(macroTxt){                                
+                                sendMacro();
+                                setTimeout(function(){
+                                    restartController();
+                                    console.log("RESTARTING!");
+                                },storedMacroTime);
+                            }else{
+                                alert("NO MACRO INPUT");
+                            }
+                            
+                        }
+
+                        function saveMacroInterval(){
+                            localStorage.setItem("nxbtMacroInterval",document.getElementById("macrosAutoIntervalInput").value);
+                            storedMacroInterval = localStorage.getItem("nxbtMacroInterval");
+                        }
+
+                        function saveMacroTxt(){
+                            localStorage.setItem("nxbtMacroTxt",document.getElementById("macro-text").value);
+                            storedMacroTxt = localStorage.getItem("nxbtMacroTxt");
+                            calculateTotalMacroTime();
+                        }
+
+                        function saveMacroTime(){
+                            localStorage.setItem("nxbtMacroTimeTotal",document.getElementById("macrosTimeInput").value);
+                            storedMacroTime = localStorage.getItem("nxbtMacroTimeTotal");
+                        }
+
+                        function runAutoMacro(){
+                            var autoMacroInterval = document.getElementById("macrosAutoIntervalInput").value;
+                            
+                            if(autoMacroInterval){
+                                document.getElementById("stopAutoMacroBtn").style.display = "block";
+                                    document.getElementById("startAutoMacroBtn").style.display = "none";
+                                macrosRestartCtrl();
+                                autoMacro = window.setInterval(function(){
+                                    macrosRestartCtrl(); 
+                                },autoMacroInterval);
+                            }else{
+                                alert("AUTO MACROS INTERVER NULL!");
+                            }
+                        }
+
+                        function stopAutoMacro(){
+                            clearInterval(autoMacro);
+                            restartController();
+                            document.getElementById("startAutoMacroBtn").style.display = "block";
+                            document.getElementById("stopAutoMacroBtn").style.display = "none";
+                        }
+                        
+                        function calculateTotalMacroTime(){
+                            var txt = document.getElementById("macro-text").value;
+                            const regexGetSec = /[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)/g;
+                            const regexVerify = /^\d*\.?\d*$/;
+
+                            var filteredTxt = txt.match(regexGetSec);
+                            var total = 0;
+
+                            for(var i=0;i<filteredTxt.length;i++){
+                                var verifiedTxt = filteredTxt[i].match(regexVerify);
+                                if(verifiedTxt){
+                                    total = total+ parseFloat(verifiedTxt);
+                                }
+                            }
+                            //additional 1000 incase of buffer
+                            var miliformula = (total*1000)+1000;
+                            document.getElementById("macrosTimeInput").value = miliformula;
+                            saveMacroTime();
+                        }
+
+                    </script>
+                </div>
+            </section>
+
+            <section id="controller-sessions" class="hidden surface">
+                <h1>Other Controller Sessions</h1>
+                <div id="controller-session-container"></div>
+            </section>
+
+            <section id="error-display"></section>
+
+            <footer>
+                <p>Source Code and Documentation Available <a href="https://github.com/Brikwerk/nxbt" target="_blank">Here</a></p>
+                <p>Made By <a href="http://github.com/Brikwerk" target="_blank">Reece Walsh</a></p>
+            </footer>
+        </main>
+
+        <script src="js/socket.io.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
                                     <td>T</td>
                                 </tr>
                                 <tr>
