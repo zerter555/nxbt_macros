@@ -1,0 +1,124 @@
+var macroString = "";
+var key;
+var timer = 0;
+var keyDownTime;
+var keyUpTime;
+var onePress = 0;
+
+document.body.addEventListener('keydown', function(e) {    
+		key = e.keyCode;
+    clearInterval(keyUpTime);
+    if(onePress == 0){
+    	  macroString = macroString + (timer/1000) + "S "+"&#013;&#010;";
+        macroString = macroString + keyboardToController(e.keyCode) + " ";
+				timer = 0;
+        keyDownTime = setInterval(function(){ 
+          timer = timer + 100;
+        }, 100);
+        onePress = 1;
+    }
+    
+      document.getElementById("txtt").innerHTML = timer;
+});
+
+document.body.addEventListener('keyup', function(e) {
+    if(key == e.keyCode){
+      clearInterval(keyDownTime);
+      macroString = macroString + (timer/1000) + "S "+"&#013;&#010;";
+      onePress = 0;
+      document.getElementById("macros").innerHTML = macroString;
+      timer = 0;
+ 		
+    keyUpTime = setInterval(function(){ 
+    	timer = timer + 100;
+      document.getElementById("txtt").innerHTML = timer;
+    }, 100); 
+    }
+});
+
+
+function keyboardToController(key){
+  var control;
+
+  switch (key) {
+    case 87:
+      control = "L_STICK@+000+085";
+      break;
+    case 83:
+      control = "L_STICK@+000-085";
+      break;
+    case 65:
+       control = "L_STICK@-085+000";
+      break;
+    case 68:
+      control = "L_STICK@+085+000";
+      break;
+    case 84:
+      control = "L_STICK_PRESS";
+      break;
+    case 38:
+      control = "R_STICK@+000+085";
+      break;
+    case 40:
+      control = "R_STICK@+000-085";
+      break;
+    case 37:
+       control = "R_STICK@-085+000";
+      break;
+    case 39:
+      control = "R_STICK@+085+000";
+      break;
+    case 89:
+      control = "R_STICK_PRESS";
+      break;
+    case 71:
+    	control = "DPAD_UP";
+      break;
+    case 66:
+    	control = "DPAD_DOWN";
+      break;
+    case 86:
+    	control = "DPAD_LEFT";
+      break;
+    case 78:
+    	control = "DPAD_RIGHT";
+      break;
+    case 73:
+    	control = "X";
+      break;
+    case 75:
+    	control = "B";
+      break;
+    case 74:
+    	control = "Y";
+      break;
+    case 76:
+    	control = "A";
+      break;
+    case 49:
+    	control = "L";
+      break;
+    case 50:
+    	control = "ZL";
+      break;
+    case 56:
+    	control = "R";
+      break;
+    case 57:
+    	control = "ZR";
+      break;
+    case 54:
+    	control = "PLUS";
+      break;
+    case 55:
+    	control = "MINUS";
+      break;
+    case 219:
+    	control = "HOME";
+      break;
+    case 221:
+    	control = "CAPTURE";
+      break;
+  }
+  return control
+}
