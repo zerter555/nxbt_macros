@@ -1,3 +1,4 @@
+DIALGA/PALKIA
 home 0.1s
 0.5s
 y 0.5s
@@ -14,6 +15,25 @@ a 0.5s
 12.0s
 L_STICK@+000+080 1.00s
 2.0s
+a 0.5s
+1.0s
+a 0.5s
+
+GIRATINA
+home 0.1s
+0.5s
+y 0.5s
+0.5s
+a 0.5s
+0.5s
+a 0.5s
+0.5s
+a 0.5s
+25.0s
+a 0.5s
+2.0s
+a 0.5s
+11.0s
 a 0.5s
 1.0s
 a 0.5s
